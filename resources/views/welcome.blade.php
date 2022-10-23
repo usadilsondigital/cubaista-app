@@ -141,6 +141,15 @@
     
     <div class="container mt-5">
       <div class="row">
+        @if ($errors->any())
+           <div id="errorId" class="alert alert-danger alert-block">   
+            <button type="button" class="close" data-dismiss="alert" onclick="document.getElementById('errorId').style.display = 'none';">×</button>	
+                    @foreach ($errors->all() as $error)
+                        <span>{{ $error }}</span>
+                    @endforeach                
+            </div>
+        @endif
+
         @if ($message = Session::get('success'))
         <div id="successId" class="alert alert-success alert-block">
           <button type="button" class="close" data-dismiss="alert" onclick="document.getElementById('successId').style.display = 'none';">×</button>	
@@ -152,7 +161,7 @@
         @if ($message = Session::get('error'))
         <div id="dangerId" class="alert alert-danger alert-block">
           <button type="button" class="close" data-dismiss="alert" onclick="document.getElementById('dangerId').style.display = 'none';">×</button>	
-          <strong>Danger!  </strong>{{ $message }}
+          <strong>Attention!  </strong>{{ $message }}
         </div>
         @endif
         
