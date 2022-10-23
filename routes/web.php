@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CustomRegisterController;
 use App\Http\Controllers\CubaistaController;
+use App\Http\Controllers\CountryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,24 +27,30 @@ Route::get('/dashboard', function () {
 
 
 Route::controller(CustomRegisterController::class)->group(function () {
-    
-    Route::post('/store', 'store');  
+
+    Route::post('/store', 'store');
 });
 
 Route::controller(CubaistaController::class)->group(function () {
-    
+
     /*Route::get('/profiles', 'index'); */
-    Route::get('/profiles/create', 'create');  
-    Route::post('/cubaista', 'store');  
-   /* Route::get('/profiles/{profile}', 'show'); 
+    Route::get('/profiles/create', 'create');
+    Route::post('/cubaista', 'store');
+    /* Route::get('/profiles/{profile}', 'show'); 
     Route::get('/profiles/{profile}/edit', 'edit'); 
     Route::put('/profiles/{profile}', 'update')->name("profiles.update");  
     Route::patch('/profiles/{profile}', 'update');  
     
     Route::delete('/profiles/{profile}', 'delete');    
     Route::get('/profiles/{profile}/delete', 'destroy'); */
-    });
+});
+
+Route::controller(CountryController::class)->group(function () {
+    Route::get('/country', 'index');
+    Route::get('/country/create', 'create');
+    Route::post('/country', 'store');
+});
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

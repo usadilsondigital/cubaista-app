@@ -15,7 +15,8 @@ class CountryController extends Controller
      */
     public function index()
     {
-        //
+        $countries = Country::all();
+        return view('countryview.index', ['countries' => $countries]);
     }
 
     /**
@@ -25,7 +26,7 @@ class CountryController extends Controller
      */
     public function create()
     {
-        //
+        return view('countryview.create');
     }
 
     /**
@@ -36,7 +37,31 @@ class CountryController extends Controller
      */
     public function store(StoreCountryRequest $request)
     {
-        //
+        try {
+            $firstNameX = $request->first_name;
+            $lastNameX = $request->last_name;
+            $phoneX = $request->phone;
+            $addressX = $request->address;
+            $cityX = $request->city;
+            $stateX = $request->state;
+            $zipcodeX = $request->zipcode;
+            $availableX = $request->available;
+
+            $Country = Country::firstOrNew(['first_name' =>  $firstNameX]);
+
+            $Country->first_name = $firstNameX;
+            $Country->last_name = $lastNameX;
+            $Country->phone = $phoneX;
+            $Country->address = $addressX;
+            $Country->city = $cityX;
+            $Country->state = $stateX;
+            $Country->zipcode = $zipcodeX;
+            $Country->available = $availableX;
+            $Country->save();
+            return redirect('/country');
+        } catch (\Exception $e) {
+            echo 'Message: ' . $e->getMessage();
+        }
     }
 
     /**
