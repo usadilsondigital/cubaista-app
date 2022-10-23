@@ -27,5 +27,6 @@ Route::get('/dashboard', function () {
 Route::controller(CustomRegisterController::class)->group(function () {
     
     Route::post('/store', 'store');  
+});
 
 require __DIR__.'/auth.php';

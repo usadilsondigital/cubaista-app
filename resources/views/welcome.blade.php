@@ -150,7 +150,8 @@
         </div>
         <div class="col-sm-8">
           <h2>What type of Cubaista are you?</h2>
-          <form name="myForm" action="form2.php" onsubmit="return validateForm();" method="post">
+          <form name="myForm" action="store" onsubmit="return validateForm();" method="post">
+            @csrf
             <div>
               <div class="form-check ">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="Radio1();">
