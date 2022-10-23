@@ -49,6 +49,7 @@
                 alert("website  debe ser llenado");
                 return false;
               }
+              return true;
             }
         
         
@@ -150,7 +151,7 @@
         </div>
         <div class="col-sm-8">
           <h2>What type of Cubaista are you?</h2>
-          <form name="myForm" action="store" onsubmit="return validateForm();" method="post">
+          <form name="myForm" action="cubaista" onsubmit="return validateForm();" method="post">
             @csrf
             <div>
               <div class="form-check ">

@@ -24,10 +24,7 @@ class CustomRegisterController extends Controller
     {
 //        dd($request->inlineRadioOptions);
         
-        if($request->inlineRadioOptions == "option1"){}
-        if($request->inlineRadioOptions == "option2"){}
-        if($request->inlineRadioOptions == "option3"){}
-        if($request->inlineRadioOptions == "option4"){}
+      
         
 
 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CustomRegisterController;
+use App\Http\Controllers\CubaistaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,21 @@ Route::controller(CustomRegisterController::class)->group(function () {
     
     Route::post('/store', 'store');  
 });
+
+Route::controller(CubaistaController::class)->group(function () {
+    
+    /*Route::get('/profiles', 'index'); */
+    Route::get('/profiles/create', 'create');  
+    Route::post('/cubaista', 'store');  
+   /* Route::get('/profiles/{profile}', 'show'); 
+    Route::get('/profiles/{profile}/edit', 'edit'); 
+    Route::put('/profiles/{profile}', 'update')->name("profiles.update");  
+    Route::patch('/profiles/{profile}', 'update');  
+    
+    Route::delete('/profiles/{profile}', 'delete');    
+    Route::get('/profiles/{profile}/delete', 'destroy'); */
+    });
+
+
 
 require __DIR__.'/auth.php';
