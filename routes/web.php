@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\CustomRegisterController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,5 +22,10 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::controller(CustomRegisterController::class)->group(function () {
+    
+    Route::post('/store', 'store');  
 
 require __DIR__.'/auth.php';
