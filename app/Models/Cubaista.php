@@ -10,13 +10,15 @@ class Cubaista extends Model
 {
     use HasFactory;
 
+    protected $table = "cubaista";
 
     protected $fillable = [
         'first_name',
         'last_name',
         'email',
         'website',
-        'company_name'
+        'company_name',
+        'additional_notes'
     ];
 
     

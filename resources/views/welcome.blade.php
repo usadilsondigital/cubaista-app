@@ -141,6 +141,39 @@
     
     <div class="container mt-5">
       <div class="row">
+        @if ($message = Session::get('success'))
+        <div id="successId" class="alert alert-success alert-block">
+          <button type="button" class="close" data-dismiss="alert" onclick="document.getElementById('successId').style.display = 'none';">×</button>	
+                <strong>Success!  </strong>{{ $message }}
+        </div>        
+        @endif
+        
+        
+        @if ($message = Session::get('error'))
+        <div id="dangerId" class="alert alert-danger alert-block">
+          <button type="button" class="close" data-dismiss="alert" onclick="document.getElementById('dangerId').style.display = 'none';">×</button>	
+          <strong>Danger!  </strong>{{ $message }}
+        </div>
+        @endif
+        
+        
+        @if ($message = Session::get('warning'))
+        <div id="warningId" class="alert alert-warning alert-block">
+          <button type="button" class="close" data-dismiss="alert" onclick="document.getElementById('warningId').style.display = 'none';">×</button>	
+          <strong>Warning!  </strong>{{ $message }}
+        </div>
+        @endif
+        
+        
+        @if ($message = Session::get('info'))
+        <div id="infoId" class="alert alert-info alert-block">
+          <button type="button" class="close" data-dismiss="alert" onclick="document.getElementById('infoId').style.display = 'none';">×</button>	
+          <strong>Info!  </strong>{{ $message }}
+        </div>
+        @endif
+        
+      </div>
+      <div class="row">
         <div class="col-sm-4">
           <h2>About Me</h2>
           <h5>Photo of me:</h5>
