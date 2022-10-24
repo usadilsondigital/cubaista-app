@@ -66,6 +66,7 @@ class CubaistaController extends Controller
             }
         }
         if ($request->inlineRadioOptions == "option2") {
+            dd($request);
             $validated = $request->validate([
                 'firstname2' => 'required|max:255',
                 'lastname2' => 'required|max:255',
@@ -74,6 +75,13 @@ class CubaistaController extends Controller
             if (filter_var($request->website2, FILTER_VALIDATE_URL)) {
                 $consult  = \DB::table('cubaista')->where('email', $request->email2)->count();
                 if ($consult == 0) {
+
+                   $based2_count =  count($request->based2);
+                   foreach ($request->based2 as $value) {
+                    echo "$value <br>";
+                    Country::
+                  }
+
                     $first_name  = $request->firstname2;
                     $last_name  = $request->lastname2;
                     $email  = $request->email2;

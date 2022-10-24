@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->string('website');
-            $table->string('company_name');
-            $table->text('additional_notes');
+            $table->string('website')->nullable();
+            $table->string('company_name')->nullable();
+            $table->text('additional_notes')->nullable();
             $table->timestamps();
         });
     }
