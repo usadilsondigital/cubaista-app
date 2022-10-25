@@ -6,7 +6,9 @@ use App\Models\Cubaista;
 use App\Models\Country;
 use App\Http\Requests\StoreCubaistaRequest;
 use App\Http\Requests\UpdateCubaistaRequest;
+use App\Mail\ConfirmationMail;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Mail;
 
 class CubaistaController extends Controller
 {
@@ -17,7 +19,7 @@ class CubaistaController extends Controller
      */
     public function index()
     {
-        //
+        dd('cubaista');
     }
 
     /**
@@ -50,7 +52,7 @@ class CubaistaController extends Controller
             if ($consult == 0) {
                 $first_name  = $request->firstname1;
                 $last_name  = $request->lastname1;
-                $email  = $request->email1;
+                $email  = $request->email1;               
                 $additional_notes  = $request->additional_notes1;
                 $cubaista = Cubaista::firstOrNew(['email' =>  $email]);
                 $cubaista->first_name = $first_name;
@@ -60,6 +62,12 @@ class CubaistaController extends Controller
                 $cubaista->additional_notes = $additional_notes;
                 $cubaista->save();
                 //enviar el mail
+                /* Mail::raw($link, function($message){
+                    $message->to(request('email1'))
+                    ->subject('Confirm your email and Create Password');
+                });*/
+                Mail::to(request('email1'))
+                ->send(new ConfirmationMail($email));
                 //redirect para la pagina de revise su correo
                 return redirect(RouteServiceProvider::WELCOME)->with('success', ' Please check your email for confirmation!');
             } else {

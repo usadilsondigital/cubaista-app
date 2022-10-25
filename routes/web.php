@@ -27,13 +27,13 @@ Route::get('/dashboard', function () {
 
 
 Route::controller(CustomRegisterController::class)->group(function () {
-
+    Route::get('/mail/{mailed}', 'mail');
     Route::post('/store', 'store');
 });
 
 Route::controller(CubaistaController::class)->group(function () {
 
-    /*Route::get('/profiles', 'index'); */
+   /* Route::get('/mail', 'index');*/
     Route::get('/profiles/create', 'create');
     Route::post('/cubaista', 'store');
     /* Route::get('/profiles/{profile}', 'show'); 

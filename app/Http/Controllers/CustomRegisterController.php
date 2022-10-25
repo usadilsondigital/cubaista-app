@@ -12,7 +12,17 @@ use Illuminate\Validation\Rules;
 
 class CustomRegisterController extends Controller
 {
-     /**
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function mail(string $mailed)
+    {
+        return view('customregisterview.index', ['mailed' => $mailed]);
+    }
+
+    /**
      * Handle an incoming registration request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -22,10 +32,10 @@ class CustomRegisterController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->inlineRadioOptions);
-        
-      
-        
+        //        dd($request->inlineRadioOptions);
+
+    dd('dsds');
+
 
 
         /** */
