@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cubaista;
+use App\Models\Country;
 use App\Http\Requests\StoreCubaistaRequest;
 use App\Http\Requests\UpdateCubaistaRequest;
 use App\Providers\RouteServiceProvider;
@@ -66,22 +67,16 @@ class CubaistaController extends Controller
             }
         }
         if ($request->inlineRadioOptions == "option2") {
-            dd($request);
+           
             $validated = $request->validate([
                 'firstname2' => 'required|max:255',
                 'lastname2' => 'required|max:255',
-                'email2' => 'required|email:rfc,dns|max:255'
+                'email2' => 'required|email:rfc,dns|max:255',
+                'based2' => 'required'
             ]);
             if (filter_var($request->website2, FILTER_VALIDATE_URL)) {
                 $consult  = \DB::table('cubaista')->where('email', $request->email2)->count();
                 if ($consult == 0) {
-
-                   $based2_count =  count($request->based2);
-                   foreach ($request->based2 as $value) {
-                    echo "$value <br>";
-                    Country::
-                  }
-
                     $first_name  = $request->firstname2;
                     $last_name  = $request->lastname2;
                     $email  = $request->email2;
@@ -94,7 +89,17 @@ class CubaistaController extends Controller
                     $cubaista->website = $website;
                     $cubaista->company_name = $company_name;
                     $cubaista->additional_notes = $additional_notes;
+                    $based2_count =  count($request->based2);                   
                     $cubaista->save();
+                    if($based2_count>0){
+                        foreach ($request->based2 as $value) {
+                            $aux = new Country; 
+                            $aux->name = $value;
+                            $aux->cubaista_id = $cubaista->id;                
+                            $aux->save();
+                          }
+                       }
+                    
                     //enviar el mail
                     //redirect para la pagina de revise su correo
                     return redirect(RouteServiceProvider::WELCOME)->with('success', ' Please check your email for confirmation!');
@@ -127,6 +132,15 @@ class CubaistaController extends Controller
                     $cubaista->company_name = $company_name;
                     $cubaista->additional_notes = $additional_notes;
                     $cubaista->save();
+                    $based3_count =  count($request->based3); 
+                    if($based3_count>0){
+                        foreach ($request->based3 as $value) {
+                            $aux = new Country; 
+                            $aux->name = $value;
+                            $aux->cubaista_id = $cubaista->id;                
+                            $aux->save();
+                          }
+                       }
                     //enviar el mail
                     //redirect para la pagina de revise su correo
                     return redirect(RouteServiceProvider::WELCOME)->with('success', ' Please check your email for confirmation!');
@@ -159,6 +173,15 @@ class CubaistaController extends Controller
                     $cubaista->company_name = $company_name;
                     $cubaista->additional_notes = $additional_notes;
                     $cubaista->save();
+                    $based4_count =  count($request->based4); 
+                    if($based4_count>0){
+                        foreach ($request->based4 as $value) {
+                            $aux = new Country; 
+                            $aux->name = $value;
+                            $aux->cubaista_id = $cubaista->id;                
+                            $aux->save();
+                          }
+                       }
                     //enviar el mail
                     //redirect para la pagina de revise su correo
                     return redirect(RouteServiceProvider::WELCOME)->with('success', ' Please check your email for confirmation!');
