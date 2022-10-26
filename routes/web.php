@@ -18,7 +18,22 @@ use App\Http\Controllers\CountryController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+        $random = rand(10000, 99999);
+        $im = imagecreatetruecolor(200, 30);
+        $white = imagecolorallocate($im, 255, 255, 255);
+        $black = imagecolorallocate($im, 0, 0, 0);
+        imagefilledrectangle($im, 0, 0, 200, 29, $white);
+        $text = $random;
+        $font = './arial.ttf';
+        imagettftext($im, 30, 0, 10, 30, $black, $font, $text);
+        ob_start();
+        imagepng($im);
+        $imstr = base64_encode(ob_get_clean());
+        imagedestroy($im);
+        /*Image First*/
+       
+    return view('welcome', array('data' => $imstr,'random' => $random ));
 });
 
 Route::get('/dashboard', function () {
@@ -33,7 +48,7 @@ Route::controller(CustomRegisterController::class)->group(function () {
 
 Route::controller(CubaistaController::class)->group(function () {
 
-   /* Route::get('/mail', 'index');*/
+    Route::get('/cubaista', 'index');
     Route::get('/profiles/create', 'create');
     Route::post('/cubaista', 'store');
     /* Route::get('/profiles/{profile}', 'show'); 
