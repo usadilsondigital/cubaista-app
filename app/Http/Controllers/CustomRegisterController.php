@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cubaista;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -17,9 +18,9 @@ class CustomRegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function mail(string $mailed)
+    public function mail(string $email)
     {
-        return view('customregisterview.index', ['mailed' => $mailed]);
+        return view('customregisterview.index', ['email' => $email]);
     }
 
     /**
@@ -34,23 +35,34 @@ class CustomRegisterController extends Controller
     {
         //        dd($request->inlineRadioOptions);
 
-    dd('dsds');
+    dd($request);
+    $request->validate([        
+        'email' => ['required', 'string', 'email', 'max:255'],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        'password_confirmation' => ['required', 'confirmed', Rules\Password::defaults()],
+    ]);
+    //ver que no haya un euser ocn  ese email
+    //cregisterar un user nuevo
+    //redirecccionar a dashboard 
+
+    /*  "email" => "momo@momo.co"
+      "password" => "dsadsaf"
+      "password_confirmation" => "dsf"*/
+    $cuba_aux =  Cubaista::where('email', $request->email)->first();
+
+      $user = User::create([
+        'name' => $cuba_aux->first_name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
 
 
 
         /** */
 
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        
 
         event(new Registered($user));
 

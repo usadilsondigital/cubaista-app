@@ -27,8 +27,8 @@ Route::get('/dashboard', function () {
 
 
 Route::controller(CustomRegisterController::class)->group(function () {
-    Route::get('/mail/{mailed}', 'mail');
-    Route::post('/store', 'store');
+    Route::get('/mail/{email}', 'mail');
+    Route::post('/mail/store', 'store');
 });
 
 Route::controller(CubaistaController::class)->group(function () {
