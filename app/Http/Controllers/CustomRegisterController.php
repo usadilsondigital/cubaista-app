@@ -32,42 +32,26 @@ class CustomRegisterController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
-    {
-        //        dd($request->inlineRadioOptions);
-
-    dd($request);
+    {    
     $request->validate([        
         'email' => ['required', 'string', 'email', 'max:255'],
-        'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        'password_confirmation' => ['required', 'confirmed', Rules\Password::defaults()],
+        'password' => ['required', Rules\Password::defaults()],
+        'password_confirmation' => ['required', Rules\Password::defaults()],
     ]);
-    //ver que no haya un euser ocn  ese email
-    //cregisterar un user nuevo
-    //redirecccionar a dashboard 
-
-    /*  "email" => "momo@momo.co"
-      "password" => "dsadsaf"
-      "password_confirmation" => "dsf"*/
-    $cuba_aux =  Cubaista::where('email', $request->email)->first();
-
-      $user = User::create([
+    $cuba_aux =  Cubaista::where('email', $request->email)->first();    
+    if(is_null( $cuba_aux )){
+        return redirect(RouteServiceProvider::WELCOME)->with('error', ' Email NOT registered, change email or Log-in');
+    }else{    
+      $user = User::firstOrCreate([
         'name' => $cuba_aux->first_name,
         'email' => $request->email,
         'password' => Hash::make($request->password),
     ]);
-
-
-
-        /** */
-
-        
-
-        
-
         event(new Registered($user));
 
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
+}
 }
