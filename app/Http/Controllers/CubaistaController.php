@@ -19,7 +19,6 @@ class CubaistaController extends Controller
      */
     public function index()
     {
-        dd('cubaista');
     }
 
     /**
@@ -40,7 +39,6 @@ class CubaistaController extends Controller
      */
     public function store(StoreCubaistaRequest $request)
     {
-
         if ($request->inlineRadioOptions == "option1") {
 
             $validated = $request->validate([
@@ -52,7 +50,7 @@ class CubaistaController extends Controller
             if ($consult == 0) {
                 $first_name  = $request->firstname1;
                 $last_name  = $request->lastname1;
-                $email  = $request->email1;               
+                $email  = $request->email1;
                 $additional_notes  = $request->additional_notes1;
                 $cubaista = Cubaista::firstOrNew(['email' =>  $email]);
                 $cubaista->first_name = $first_name;
@@ -62,12 +60,8 @@ class CubaistaController extends Controller
                 $cubaista->additional_notes = $additional_notes;
                 $cubaista->save();
                 //enviar el mail
-                /* Mail::raw($link, function($message){
-                    $message->to(request('email1'))
-                    ->subject('Confirm your email and Create Password');
-                });*/
                 Mail::to(request('email1'))
-                ->send(new ConfirmationMail($email));
+                    ->send(new ConfirmationMail($email));
                 //redirect para la pagina de revise su correo
                 return redirect(RouteServiceProvider::WELCOME)->with('success', ' Please check your email for confirmation!');
             } else {
@@ -75,7 +69,7 @@ class CubaistaController extends Controller
             }
         }
         if ($request->inlineRadioOptions == "option2") {
-           
+
             $validated = $request->validate([
                 'firstname2' => 'required|max:255',
                 'lastname2' => 'required|max:255',
@@ -97,18 +91,19 @@ class CubaistaController extends Controller
                     $cubaista->website = $website;
                     $cubaista->company_name = $company_name;
                     $cubaista->additional_notes = $additional_notes;
-                    $based2_count =  count($request->based2);                   
+                    $based2_count =  count($request->based2);
                     $cubaista->save();
-                    if($based2_count>0){
+                    if ($based2_count > 0) {
                         foreach ($request->based2 as $value) {
-                            $aux = new Country; 
+                            $aux = new Country;
                             $aux->name = $value;
-                            $aux->cubaista_id = $cubaista->id;                
+                            $aux->cubaista_id = $cubaista->id;
                             $aux->save();
-                          }
-                       }
-                    
+                        }
+                    }
                     //enviar el mail
+                    Mail::to(request('email2'))
+                    ->send(new ConfirmationMail($email));
                     //redirect para la pagina de revise su correo
                     return redirect(RouteServiceProvider::WELCOME)->with('success', ' Please check your email for confirmation!');
                 } else {
@@ -140,16 +135,18 @@ class CubaistaController extends Controller
                     $cubaista->company_name = $company_name;
                     $cubaista->additional_notes = $additional_notes;
                     $cubaista->save();
-                    $based3_count =  count($request->based3); 
-                    if($based3_count>0){
+                    $based3_count =  count($request->based3);
+                    if ($based3_count > 0) {
                         foreach ($request->based3 as $value) {
-                            $aux = new Country; 
+                            $aux = new Country;
                             $aux->name = $value;
-                            $aux->cubaista_id = $cubaista->id;                
+                            $aux->cubaista_id = $cubaista->id;
                             $aux->save();
-                          }
-                       }
+                        }
+                    }
                     //enviar el mail
+                    Mail::to(request('email3'))
+                    ->send(new ConfirmationMail($email));
                     //redirect para la pagina de revise su correo
                     return redirect(RouteServiceProvider::WELCOME)->with('success', ' Please check your email for confirmation!');
                 } else {
@@ -181,16 +178,18 @@ class CubaistaController extends Controller
                     $cubaista->company_name = $company_name;
                     $cubaista->additional_notes = $additional_notes;
                     $cubaista->save();
-                    $based4_count =  count($request->based4); 
-                    if($based4_count>0){
+                    $based4_count =  count($request->based4);
+                    if ($based4_count > 0) {
                         foreach ($request->based4 as $value) {
-                            $aux = new Country; 
+                            $aux = new Country;
                             $aux->name = $value;
-                            $aux->cubaista_id = $cubaista->id;                
+                            $aux->cubaista_id = $cubaista->id;
                             $aux->save();
-                          }
-                       }
+                        }
+                    }
                     //enviar el mail
+                    Mail::to(request('email4'))
+                    ->send(new ConfirmationMail($email));
                     //redirect para la pagina de revise su correo
                     return redirect(RouteServiceProvider::WELCOME)->with('success', ' Please check your email for confirmation!');
                 } else {
