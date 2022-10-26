@@ -168,13 +168,12 @@
                     <a class="nav-link active" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Formulario Clientes</a>
+                    <a class="nav-link" href="/">Client Form</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-link underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                        {{ __('Log-in') }}
+                    </a>
                 </li>
             </ul>
         </div>
@@ -267,6 +266,7 @@
                                 above</label>
                         </div>
                     </div>
+                    
 
 
                     <div id="myDIV1" style="display: none;">
@@ -1158,9 +1158,17 @@
              </textarea>
                         </div>
 
+                       
 
                     </div>
-
+                    <br/>
+                    <div>
+                        <input type="text" class="form-control" id="captcha" placeholder="write this captcha" name="captcha" autocomplete="off" maxlength="5" minlength="5">
+                        <input type="hidden" class="form-control" id="captcha_confirmation"name="captcha_confirmation"  value="{{$random}}" autocomplete="off" maxlength="5" minlength="5" readonly="readonly">
+                        <br/>
+                         <img src="data:image/png;base64,{{ $data }}"/>
+                    </div>
+                    <br/>
                     <button type="submit" name="submit" value="Submit" class="btn btn-primary">Submit</button>
 
 

@@ -198,4 +198,6 @@ return [
 
     'same_site' => 'lax',
 
+    'captcha_key' => env('CAPTCHA_KEY', 12345),
+
 ];

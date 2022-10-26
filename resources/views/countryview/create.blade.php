@@ -64,17 +64,9 @@
         </div>
         <div class="col-sm-8">
           <h2>Create Country?</h2>
-          <form name="myForm" action="country" method="post">
-            @csrf
-            <div>
-              <div>
-                <input type="text" class="form-control" id="firstname1" placeholder="First name" name="firstname1" autocomplete="off">
-              </div>
-            </div>    
-            <button type="submit" name="submit" value="Submit" class="btn btn-primary">Submit</button>
-            <br><br>
-          </form>
+          <img src="data:image/png;base64,{{ $data }}"/>
         </div>
+        imagepng($im);
       </div>
     </div>
     

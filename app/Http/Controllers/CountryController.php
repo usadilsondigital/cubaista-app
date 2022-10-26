@@ -26,7 +26,25 @@ class CountryController extends Controller
      */
     public function create()
     {
-        return view('countryview.create');
+        $random = rand(10000, 99999);
+        //change env        
+        // config('database.connections.mysql.host')
+        // env('CAPTCHA_KEY')
+        config(['session.captcha_key' => $random]);
+        dd(config('session.captcha_key'));
+
+        $im = imagecreatetruecolor(400, 30);
+        $white = imagecolorallocate($im, 255, 255, 255);
+        $black = imagecolorallocate($im, 0, 0, 0);
+        imagefilledrectangle($im, 0, 0, 399, 29, $white);
+        $text = $random;
+        $font = './arial.ttf';
+        imagettftext($im, 30, 0, 10, 30, $black, $font, $text);
+        ob_start();
+        imagepng($im);
+        $imstr = base64_encode(ob_get_clean());
+        imagedestroy($im);
+        return view('countryview.create', array('data' => $imstr));
     }
 
     /**
